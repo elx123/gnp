@@ -78,7 +78,7 @@ func (s Server) handle(clientAddr string, rrq ReadReq) {
 	var (
 		ackPkt  Ack
 		errPkt  Err
-		dataPkt = Data{Payload: bytes.NewReader(s.Payload)}
+		dataPkt = Data{Payload: bytes.NewReader(s.Payload)} // 这里有个细节,就是Payload 是一个io.reader .也就是内部肯定是有buf 标志位的, 每次read 以后都会不同数据
 		buf     = make([]byte, DatagramSize)
 	)
 
